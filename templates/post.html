@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>Posts: </h2>
+{% for post in all_posts %}
+<div>
+    <b> {{ post.author }} </b> <small> {{ post.publish_date }} </small>
+    <blockquote class="blockquote">
+        <p class="mb-0">{{ post.text }}</p>
+    </blockquote>
+    <p> Rate: {{ post.rate }} </p>
+</div>
+<hr>
+
+{% empty %}
+
+<h3>No post here....</h3>
+{% endfor %}
+{% endblock %}

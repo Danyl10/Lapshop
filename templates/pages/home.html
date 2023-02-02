@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>HOME PAGE!</h1>
+    {% for laptop in laptopes %}
+        <div>
+            title - <a href="/laptop-detail/{{ laptop.id }}">{{ laptop.title }}</a> <br>
+        price -
+            {% if laptop.is_sale %}
+                <span style="text-decoration: line-through; color: red;"> {{ laptop.price }} </span>
+                - {{laptop.discount }} % = {{ laptop.get_price }}$
+                {% else %}
+                <span>{{ laptop.get_price }} $</span>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

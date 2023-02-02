@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1>Laptop Page</h1>
+
+<form action="">
+    <div>
+        <label for="">Category</label>
+        <select name="category_id" id="category">
+            <option value="">All</option>
+            {% for cat in all_laptop_categories %}
+            <option data-category="{{ cat.name }}" value="{{ cat.id }}" {% if search.category == cat.id %} selected {% endif %}>{{cat.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div>
+        <label for="">Price</label>
+        <input type="range" name="to_price" value="{{search.price__lte}}" min="0" max="1000" step="1" oninput="this.nextElementSibling.value = this.value + '$'">
+        <output>{{search.price__lte}} $</output>
+    </div>
+    <button>Search</button>
+
+</form>
+
+{% for laptop in all_laptops %}
+<div class="category-select {{ laptop.category.name }}">
+    <p><b> <a href="/laptop-detail/{{laptop.id}}"> {{ laptop.title }}</a> </b></p>
+    <p>Category: {{ laptop.category.name }}</p>
+    <p>Price : {{ book.price }}$</p>
+    <p>Rates: {{ book.get_rates }}</p>
+    <p>nucleis : {{ laptop.nucleis}}$</p>
+    <p>Processor : {{ laptop.processor }}$</p>
+    <p>Game card : {{ laptop.game_card }}$</p>
+</div>
+<hr>
+{% endfor %}
+
+
+<script>
+  let selectCategory = document.getElementById('category');
+
+  selectCategory.addEventListener('change' , function(event){
+    let categoryName =  event.target.options[event.target.options.selectedIndex].innerHTML;
+    for(let elem of document.querySelectorAll('.category-select')){
+        if(Array.from(elem.classList).indexOf(categoryName) == -1 && categoryName != 'All'){ // and
+            elem.style="display:none;"
+        } else{
+            elem.style= 'display:block';
+        }
+        console.log();
+    }
+
+
+  })
+
+</script>
+{% endblock %}
