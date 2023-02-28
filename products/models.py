@@ -22,6 +22,9 @@ class Laptop(models.Model):
     nucleis = models.FloatField(null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, default="", blank=True, null=True)
 
+
+
+
     def __str__(self):
         return self.title
 
