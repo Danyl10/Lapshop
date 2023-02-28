@@ -21,7 +21,6 @@ class Laptop(models.Model):
     video_card = models.CharField(max_length=250)
     nucleis = models.FloatField(null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, default="", blank=True, null=True)
-    photo = models.ImageField(upload_to='images/', default=False)
 
     def __str__(self):
         return self.title
@@ -55,7 +54,8 @@ class Post(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=255)
     text = models.TextField(max_length=1500)
-    rate = models.IntegerField()
+    laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return '{} :  {}'.format(self.author, self.text)
