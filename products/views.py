@@ -16,10 +16,13 @@ def home(request):
 
 from django.forms import ModelForm
 
+
 class PostForm(ModelForm):
     class Meta:
         model = Post
         exclude = ['laptop']
+
+
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
@@ -63,6 +66,7 @@ def laptop_detail(request, laptop_id):
         'comment_form': CommentForm()
     })
 
+
 def post(request):
     all_post = Post.objects.all()
     if request.method == 'POST':
@@ -75,8 +79,6 @@ def post(request):
     return render(request, 'post.html', {
         'all_posts': all_post,
         'post_form': PostForm()})
-
-
 
 
 def add_comment(request):

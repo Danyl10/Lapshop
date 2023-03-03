@@ -10,7 +10,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Laptop(models.Model):
     title = models.CharField(max_length=250)
     price = models.FloatField()
@@ -21,9 +20,6 @@ class Laptop(models.Model):
     video_card = models.CharField(max_length=250)
     nucleis = models.FloatField(null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, default="", blank=True, null=True)
-
-
-
 
     def __str__(self):
         return self.title
@@ -53,12 +49,12 @@ class Comment(models.Model):
     def __str__(self):
         return '{} :  {}'.format(self.author, self.text)
 
+
 class Post(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=255)
     text = models.TextField(max_length=1500)
     laptop = models.ForeignKey(Laptop, on_delete=models.CASCADE)
-
 
     def __str__(self):
         return '{} :  {}'.format(self.author, self.text)
