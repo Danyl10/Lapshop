@@ -16,7 +16,7 @@ urlpatterns = [
 
 product_urls = [
     path('laptop-detail/<int:laptop_id>' , views.laptop_detail),
-    path('post/', views.posts)
+    path('post/', views.post)
 ]
 
 urlpatterns += product_urls
