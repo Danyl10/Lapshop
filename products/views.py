@@ -105,3 +105,16 @@ def mail(request):
         [email],
     )
     return HttpResponse('Send email is OK!')
+
+
+from cart.forms import CartAddLaptopForm
+
+
+def laptop_list (request, id, slug):
+    laptop = get_object_or_404(Laptop,
+                                id=id,
+                                slug=slug,
+                                available=True)
+    cart_laptop_form = CartAddLaptopForm()
+    return render(request, 'cart/detail.html', {'laptop': laptop,
+                                                        'cart_laptop_form': cart_laptop_form})

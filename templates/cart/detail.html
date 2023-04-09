@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+    <h1>Your shopping cart</h1>
+    <table class="cart">
+        <thead>
+        <tr>
+            <th>Laptop</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+            <th>Unit price</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with laptop=item.laptop %}
+                <tr>
+                    <td>
+                    </td>
+                    <td>{{ laptop.title }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td><a href="{% url 'cart:cart_remove' laptop.id %}">Remove</a></td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Total</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="/laptop/" class="button light" >Continue shopping</a>
+        <a href="/" class="button">Checkout</a>
+    </p>
+
+    <p class="price">${{ laptop.price }}</p>
+<form method="post" action="{% url 'cart:cart_add'  laptop.id %}">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Add to cart">
+</form>
+
+{% endblock %}
